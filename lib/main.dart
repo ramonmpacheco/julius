@@ -14,6 +14,9 @@ class JuliusApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
+  final titleController = TextEditingController();
+  final valueController = TextEditingController();
+
   final _transactions = [
     Transaction(
         id: 't1',
@@ -97,13 +100,18 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     TextField(
+                      controller: titleController,
                       decoration: InputDecoration(labelText: 'Título'),
                     ),
                     TextField(
+                      controller: valueController,
                       decoration: InputDecoration(labelText: 'Nova Transação'),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        print(titleController.text);
+                        print(valueController.text);
+                      },
                       child: Text('Nova Transação'),
                       style: TextButton.styleFrom(primary: Colors.purple),
                     )
