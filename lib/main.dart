@@ -12,9 +12,10 @@ class JuliusApp extends StatelessWidget {
     return MaterialApp(
       home: HomePage(),
       theme: ThemeData(
-        primarySwatch: Colors.purple,
-        accentColor: Colors.amber,
-      ),
+          primarySwatch: Colors.purple,
+          accentColor: Colors.amber,
+          floatingActionButtonTheme:
+              FloatingActionButtonThemeData(foregroundColor: Colors.black)),
     );
   }
 }
