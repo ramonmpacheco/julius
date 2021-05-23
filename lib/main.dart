@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:julius/components/chart.dart';
 import 'package:julius/components/transaction_form.dart';
 import 'package:julius/components/transaction_list.dart';
 import 'package:julius/models/transaction.dart';
@@ -57,6 +58,17 @@ class _HomePageState extends State<HomePage> {
     //   date: DateTime.now(),
     // ),
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _transactions
+        .where((element) => element.date.isAfter(
+              DateTime.now().subtract(
+                Duration(days: 7),
+              ),
+            ))
+        .toList();
+  }
+
   _addTransaction(String title, double value) {
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
@@ -96,12 +108,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              child: Card(
-                child: Text('Gráfico'),
-                elevation: 5,
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_transactions),
           ],
         ),
