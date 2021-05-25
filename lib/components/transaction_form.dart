@@ -10,17 +10,26 @@ class TransactionForm extends StatefulWidget {
 }
 
 class _TransactionFormState extends State<TransactionForm> {
-  final titleController = TextEditingController();
+  final _titleController = TextEditingController();
 
-  final valueController = TextEditingController();
+  final _valueController = TextEditingController();
 
   _submitForm() {
-    final title = titleController.text;
-    final value = double.tryParse(valueController.text) ?? 0.0;
+    final title = _titleController.text;
+    final value = double.tryParse(_valueController.text) ?? 0.0;
     if (title.isEmpty || value <= 0) {
       return;
     }
     widget.onSubmit(title, value);
+  }
+
+  _showDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2021),
+      lastDate: DateTime.now(),
+    );
   }
 
   @override
@@ -32,12 +41,12 @@ class _TransactionFormState extends State<TransactionForm> {
         child: Column(
           children: [
             TextField(
-              controller: titleController,
+              controller: _titleController,
               onSubmitted: (_) => _submitForm(),
               decoration: InputDecoration(labelText: 'Título'),
             ),
             TextField(
-              controller: valueController,
+              controller: _valueController,
               onSubmitted: (_) => _submitForm(),
               decoration: InputDecoration(labelText: 'Valor(R\$)'),
               keyboardType: TextInputType.numberWithOptions(decimal: true),
@@ -47,7 +56,10 @@ class _TransactionFormState extends State<TransactionForm> {
               child: Row(
                 children: [
                   Text('Nenhuma data selecionada!'),
-                  TextButton(onPressed: () {}, child: Text('Selecionar Data'))
+                  TextButton(
+                    onPressed: _showDatePicker,
+                    child: Text('Selecionar Data'),
+                  )
                 ],
               ),
             ),
