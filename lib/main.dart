@@ -89,8 +89,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    bool isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final mediaQyery = MediaQuery.of(context);
+    bool isLandscape = mediaQyery.orientation == Orientation.landscape;
 
     final appBar = AppBar(
       title: Text('Despesas Pessoais'),
@@ -111,9 +111,9 @@ class _HomePageState extends State<HomePage> {
       ],
     );
 
-    final availableHeight = MediaQuery.of(context).size.height -
+    final availableHeight = mediaQyery.size.height -
         appBar.preferredSize.height -
-        MediaQuery.of(context).padding.top;
+        mediaQyery.padding.top;
 
     return Scaffold(
       appBar: appBar,
